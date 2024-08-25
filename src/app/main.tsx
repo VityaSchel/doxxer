@@ -179,16 +179,16 @@ function App() {
         response = await fetch(import.meta.env.VITE_API_URL + '/ip2geo')
           .then(req => req.json())
       }
-      setHostname(response.data.hostname)
-      setAsn(response.data.asn.domain)
-      setCidr(response.data.asn.route)
-      const [lat, lon] = response.data.loc.split(',').map(parseFloat)
-      setVpnUse(response.data.privacy.vpn)
-      setTorUse(response.data.privacy.tor)
-      setProxyUse(response.data.privacy.proxy)
-      setProxyService(response.data.privacy.service)
-      setIspAddress(response.data.abuse.address)
-      setIspContact(response.data.abuse.phone || response.data.abuse.email)
+      setHostname(response.data?.hostname ?? ipv4.replace(/\./g, '-'))
+      setAsn(response.data?.asn.domain ?? 'Unknown')
+      setCidr(response.data?.asn.route ?? '')
+      const [lat, lon] = response.data?.loc.split(',').map(parseFloat) ?? [0, 0]
+      setVpnUse(response.data?.privacy.vpn ?? false)
+      setTorUse(response.data?.privacy.tor ?? false)
+      setProxyUse(response.data?.privacy.proxy ?? true)
+      setProxyService(response.data?.privacy.service ?? '')
+      setIspAddress(response.data?.abuse.address ?? '')
+      setIspContact(response.data?.abuse.phone || response.data?.abuse.email || '')
       return { lat, lon }
     }
     
