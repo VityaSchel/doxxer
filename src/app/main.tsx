@@ -80,13 +80,24 @@ function App() {
   }, [])
 
   const fetchOwnIp = async () => {
-    const [ipv4, ipv6] = await Promise.all([
-      fetch(import.meta.env.VITE_API_URL + '/ipv4').then(req => req.json() as Promise<{ ip: string }>),
-      fetch(import.meta.env.VITE_API_URL + '/ipv6').then(req => req.json() as Promise<{ ip: string }>)
-    ])
-    setIpv4(ipv4.ip)
-    if(ipv6.ip !== ipv4.ip) {
-      setIpv6(ipv6.ip)
+    try {
+      const [ipv4, ipv6] = await Promise.all([
+        fetch('https://api4.ipify.org/?format=json').then(req => req.json() as Promise<{ ip: string }>),
+        fetch('https://api64.ipify.org/?format=json').then(req => req.json() as Promise<{ ip: string }>)
+      ])
+      setIpv4(ipv4.ip)
+      if(ipv6.ip !== ipv4.ip) {
+        setIpv6(ipv6.ip)
+      }
+    } catch {
+      const [ipv4, ipv6] = await Promise.all([
+        fetch(import.meta.env.VITE_API_URL + '/ipv4').then(req => req.json() as Promise<{ ip: string }>),
+        fetch(import.meta.env.VITE_API_URL + '/ipv6').then(req => req.json() as Promise<{ ip: string }>)
+      ])
+      setIpv4(ipv4.ip)
+      if (ipv6.ip !== ipv4.ip) {
+        setIpv6(ipv6.ip)
+      }
     }
   }
 
@@ -140,11 +151,15 @@ function App() {
       })
     }
     const getByIp = async () => {
-      const request = await fetch('https://ipinfo.io/widget/demo/' + ipv4)
       let response: IpInfoResponse
-      if(request.status === 200) {
-        response = await request.json()
-      } else {
+      try {
+        const request = await fetch('https://ipinfo.io/widget/demo/' + ipv4)
+        if(request.status === 200) {
+          response = await request.json()
+        } else {
+          throw new Error()
+        }
+      } catch {
         response = await fetch(import.meta.env.VITE_API_URL + '/ip2geo')
           .then(req => req.json())
       }
