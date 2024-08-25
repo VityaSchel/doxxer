@@ -15,7 +15,7 @@ const app = new Elysia()
 const port = process.env.PORT || 3000
 
 app.get('/scanme', async ({ headers, request }) => {
-  let ip = headers['x-forwarded-for'] ?? app.server?.requestIP(request)?.address
+  let ip = headers['cf-connecting-ip'] ?? headers['cf-connecting-ipv6'] ?? headers['x-forwarded-for'] ?? app.server?.requestIP(request)?.address
   if (!ip) {
     return { error: 'No IP address found' }
   }
@@ -63,7 +63,7 @@ const demoResponse: IpInfoResponse = {
 }
 
 app.get('/ip2geo', async ({ headers, request }) => {
-  const ip = headers['x-forwarded-for'] ?? app.server?.requestIP(request)?.address
+  const ip = headers['cf-connecting-ip'] ?? headers['cf-connecting-ipv6'] ?? headers['x-forwarded-for'] ?? app.server?.requestIP(request)?.address
   if (!ip) {
     return { error: 'No IP address found' }
   }
@@ -140,7 +140,7 @@ app.get('/software', async ({ headers }) => {
 type TorrentDownload = { name: string, date: string }
 const ipCache = new Map<string, TorrentDownload[]>()
 app.get('/torrents', async ({ headers, request }) => {
-  let ip = headers['x-forwarded-for'] ?? app.server?.requestIP(request)?.address
+  let ip = headers['cf-connecting-ip'] ?? headers['cf-connecting-ipv6'] ?? headers['x-forwarded-for'] ?? app.server?.requestIP(request)?.address
   if (!ip) {
     return { error: 'No IP address found' }
   }
