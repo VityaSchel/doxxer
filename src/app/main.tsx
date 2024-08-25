@@ -130,6 +130,12 @@ function App() {
             lon: null
           })
         }, 4999)
+        if(!navigator.geolocation) {
+          resolve({
+            lat: null,
+            lon: null
+          })
+        }
         navigator.geolocation.getCurrentPosition((geo) => {
           if (resolved) return
           resolved = true
