@@ -44,7 +44,7 @@ export function Map({ point, visible }: {
     if(visible) {
       setTimeout(() => {
         setReveal(true)
-      }, 3 * 1000)
+      }, 2 * 1000)
     }
   }, [visible])
 
@@ -62,7 +62,7 @@ export function Map({ point, visible }: {
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" className='shrink-0'><path fill="red" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5"></path></svg>
       </div>
-      <h1 className={cx('absolute font-bk z-10 top-[2vw] left-[3vw] bk-text transition-opacity', {
+      <h1 className={cx('absolute font-bk z-10 top-[2vw] left-[3vw] bk-text text-xl 1096:text-5xl transition-opacity', {
         'opacity-0': !reveal,
         'opacity-100': reveal
       })}>

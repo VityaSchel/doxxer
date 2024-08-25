@@ -35,7 +35,7 @@ export function Earth({ point, visible }: {
   React.useEffect(() => {
     if (visible && point.lat && point.long) {
       earthRef.current.panInsideBounds(calculateBounds(point.lat, point.long, 100), {
-        duration: 3,
+        duration: 2,
         easeLinearity: 0
       })
     }
