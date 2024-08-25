@@ -1,4 +1,4 @@
-import { latLng, LatLngBoundsExpression, marker } from 'leaflet'
+import { LatLngBoundsExpression } from 'leaflet'
 import React from 'react'
 
 export function Earth({ point, visible }: {
