@@ -29,6 +29,16 @@ app.get('/scanme', async ({ headers, request }) => {
   return { tcp, udp }
 })
 
+app.get('/ipv4', async ({ headers, request }) => {
+  const ip = headers['cf-connecting-ip'] ?? headers['x-forwarded-for'] ?? app.server?.requestIP(request)?.address
+  return { ip }
+})
+
+app.get('/ipv6', async ({ headers, request }) => {
+  const ip = headers['cf-connecting-ipv6'] ?? headers['x-forwarded-for'] ?? app.server?.requestIP(request)?.address
+  return { ip }
+})
+
 const ipcache = new Map<string, IpInfoResponse>()
 const demoResponse: IpInfoResponse = {
   data: {

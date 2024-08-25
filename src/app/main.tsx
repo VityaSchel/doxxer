@@ -81,8 +81,8 @@ function App() {
 
   const fetchOwnIp = async () => {
     const [ipv4, ipv6] = await Promise.all([
-      fetch('https://api4.ipify.org/?format=json').then(req => req.json() as Promise<{ ip: string }>),
-      fetch('https://api64.ipify.org/?format=json').then(req => req.json() as Promise<{ ip: string }>)
+      fetch(import.meta.env.VITE_API_URL + '/ipv4').then(req => req.json() as Promise<{ ip: string }>),
+      fetch(import.meta.env.VITE_API_URL + '/ipv6').then(req => req.json() as Promise<{ ip: string }>)
     ])
     setIpv4(ipv4.ip)
     if(ipv6.ip !== ipv4.ip) {
