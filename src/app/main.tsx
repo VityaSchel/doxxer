@@ -241,6 +241,10 @@ function App() {
   }
 
   const handleStart = () => {
+    let outputLatency = 0
+    try {
+      outputLatency = new AudioContext().outputLatency
+    } catch{0}
     const video = videoRef.current
     const audio = audioRef.current
     if (video && audio) {
@@ -290,7 +294,7 @@ function App() {
             }, 10.974 * 1000)
           }, 3.979 * 1000)
         }, 5.812 * 1000)
-      }, new AudioContext().outputLatency)
+      }, outputLatency)
     }
   }
 
