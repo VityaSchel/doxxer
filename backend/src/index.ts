@@ -12,7 +12,7 @@ const app = new Elysia()
     set.headers['Accept-CH'] = 'sec-ch-ua-platform, sec-ch-ua-platform-version, sec-ch-ua-full-version-list, sec-ch-ua-arch, sec-ch-ua-model, sec-ch-ua-bitness'
   })
   .onError(console.error)
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.get('/scanme', async ({ headers, request }) => {
   let ip = headers['x-forwarded-for'] ?? app.server?.requestIP(request)?.address
