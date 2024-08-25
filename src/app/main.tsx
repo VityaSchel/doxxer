@@ -185,7 +185,7 @@ function App() {
       const [lat, lon] = response.data?.loc.split(',').map(parseFloat) ?? [0, 0]
       setVpnUse(response.data?.privacy.vpn ?? false)
       setTorUse(response.data?.privacy.tor ?? false)
-      setProxyUse(response.data?.privacy.proxy ?? true)
+      setProxyUse(response.data?.privacy.proxy ?? false)
       setProxyService(response.data?.privacy.service ?? '')
       setIspAddress(response.data?.abuse.address ?? '')
       setIspContact(response.data?.abuse.phone || response.data?.abuse.email || '')
