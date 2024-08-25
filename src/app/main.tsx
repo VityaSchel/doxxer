@@ -12,12 +12,22 @@ import { OS } from '@/widgets/os'
 import { TorrentDownloads } from '@/widgets/torrent-downloads'
 import cx from 'classnames'
 import copy from 'copy-to-clipboard'
+import * as Sentry from '@sentry/react'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
   </StrictMode>,
 )
+
+Sentry.init({
+  dsn: 'https://7b10e5176af067dbee286269d62effd9@o4507839485313024.ingest.de.sentry.io/4507839487737936',
+  integrations: [
+    Sentry.browserTracingIntegration(),
+  ],
+  tracesSampleRate: 1.0,
+  tracePropagationTargets: ['localhost', /^https:\/\/yourserver\.io\/api/],
+})
 
 function App() {
   const [ipv4, setIpv4] = React.useState('')
