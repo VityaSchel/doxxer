@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'BK Font';
+  src: url('/fonts/FlameBold.otf') format('opentype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'BK Font';
+  src: url('/fonts/FlameRegular.otf') format('opentype');
+  font-weight: normal;
+}

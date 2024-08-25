@@ -1,0 +1,1 @@
+export type IpInfoResponse = { data: { hostname: string, loc: string, asn: { domain: string, route: string }, privacy: { vpn: boolean, proxy: boolean, tor: boolean, service: string }, abuse: { phone: string, email: string, address: string } } }

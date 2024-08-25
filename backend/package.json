@@ -1,0 +1,23 @@
+{
+  "name": "doxxer-backend",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun src/index.ts",
+    "dev": "bun --watch src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/lodash": "^4.17.7",
+    "@types/ua-parser-js": "^0.7.39"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.1.0",
+    "elysia": "^1.1.7",
+    "lodash": "^4.17.21",
+    "ua-parser-js": "^1.0.38"
+  }
+}
